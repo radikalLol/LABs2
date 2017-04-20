@@ -27,9 +27,17 @@ tot = k + tot
 ans = tot / count
 print("Average spam confidence: ", ans)
 
+
+import collections
+fname = input("Enter file name: ")
+if len(fname) == 0:
+    fname = 'mbox.txt'
+fh = open(fname, 'r')
+dct = {}
 for line in fh:
- if not line.startswith("Author:"): continue
- dct = line
-if line == dct:
-   dct[line] += 1
-   print("%s: %s", dct, dct[line])
+   if line.startswith("Author:"):
+       line = line.rstrip().split(':')[1].lstrip()
+       if line in dct:
+           dct[line] += 1
+       else:
+           dct[line] = 1
